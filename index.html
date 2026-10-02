@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V-Koding | Porque aprender brincando é muito melhor!</title>
+    
+    <!-- Favicon Oficial: Constelação V -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M 25 30 L 50 75 L 75 30' stroke='%23a855f7' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/><path d='M 25 30 L 50 45 L 75 30' stroke='%2338bdf8' stroke-width='2' stroke-dasharray='4 4'/><circle cx='25' cy='30' r='6' fill='%2338bdf8'/><circle cx='75' cy='30' r='6' fill='%2338bdf8'/><circle cx='50' cy='75' r='7' fill='%23a855f7'/><circle cx='50' cy='45' r='4' fill='%2338bdf8'/></svg>">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 15%, #1e1b4b 0%, #0f172a 55%, #020617 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* CABEÇALHO */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            background-color: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(139, 92, 246, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 34px;
+            height: 34px;
+        }
+
+        .logo-icon circle {
+            animation: pulseGlow 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.7; transform: scale(0.98); }
+            100% { opacity: 1; filter: drop-shadow(0 0 6px #38bdf8); }
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #38bdf8 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 14px;
+        }
+
+        nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            padding: 40px 18px 30px;
+            max-width: 880px;
+            margin: 0 auto;
+        }
+
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: #c084fc;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 1.95rem;
+            margin-bottom: 16px;
+            color: #f8fafc;
+            line-height: 1.25;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 35px rgba(168, 85, 247, 0.25);
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #38bdf8 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #94a3b8;
+            margin-bottom: 28px;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-primary {
+            display: block;
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto;
+            padding: 15px 24px;
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: #ffffff;
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(56, 189, 248, 0.45);
+        }
+
+        /* CARDS DE RECURSOS */
+        .features {
+            max-width: 1100px;
+            margin: 20px auto 40px;
+            padding: 0 18px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 24px 20px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(168, 85, 247, 0.4);
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            color: #f8fafc;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        /* SEÇÃO DE CAPTURA DE E-MAIL */
+        .capture-section {
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.25);
+            border-radius: 16px;
+            padding: 30px 18px;
+            width: calc(100% - 36px);
+            max-width: 650px;
+            margin: 10px auto 50px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .capture-section h2 {
+            font-size: 1.35rem;
+            margin-bottom: 10px;
+            color: #e2e8f0;
+        }
+
+        .capture-section p {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 20px;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+        }
+
+        .email-form input[type="email"] {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 0.95rem;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            outline: none;
+            background-color: #0f172a;
+            color: #f8fafc;
+            transition: border-color 0.3s ease;
+        }
+
+        .email-form input[type="email"]:focus {
+            border-color: #8b5cf6;
+        }
+
+        .email-form button {
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .email-form button:hover {
+            opacity: 0.9;
+        }
+
+        .security-note {
+            font-size: 0.78rem;
+            color: #64748b;
+            margin-top: 12px;
+            display: block;
+        }
+
+        /* RODAPÉ */
+        footer {
+            margin-top: auto;
+            padding: 24px 18px;
+            background-color: #020617;
+            border-top: 1px solid #1e293b;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            text-align: center;
+        }
+
+        footer p {
+            color: #64748b;
+            font-size: 0.82rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .social-links a {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.82rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #38bdf8;
+        }
+
+        /* AJUSTES PARA TABLETS E DESKTOPS (A partir de 640px) */
+        @media (min-width: 640px) {
+            header {
+                padding: 20px 8%;
+            }
+
+            .logo-icon {
+                width: 38px;
+                height: 38px;
+            }
+
+            .logo-text {
+                font-size: 1.35rem;
+            }
+
+            nav ul {
+                gap: 20px;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 80px 20px 50px;
+            }
+
+            .badge-pill {
+                font-size: 0.85rem;
+                padding: 6px 16px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .btn-primary {
+                display: inline-block;
+                width: auto;
+            }
+
+            .features {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 24px;
+                margin: 40px auto 60px;
+                padding: 0 20px;
+            }
+
+            .card {
+                padding: 30px 24px;
+            }
+
+            .capture-section {
+                padding: 40px 30px;
+                width: 100%;
+                margin: 20px auto 80px;
+            }
+
+            .capture-section h2 {
+                font-size: 1.6rem;
+            }
+
+            .email-form {
+                flex-direction: row;
+            }
+
+            .email-form input[type="email"] {
+                flex: 1;
+            }
+
+            .email-form button {
+                width: auto;
+            }
+
+            footer {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 30px 8%;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CABEÇALHO -->
+    <header>
+        <a href="#" class="brand">
+            <!-- Logo Oficial: Constelação V -->
+            <svg class="logo-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 25 30 L 50 75 L 75 30" stroke="#a855f7" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M 25 30 L 50 45 L 75 30" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 4"/>
+                <circle cx="25" cy="30" r="6" fill="#38bdf8"/>
+                <circle cx="75" cy="30" r="6" fill="#38bdf8"/>
+                <circle cx="50" cy="75" r="7" fill="#a855f7"/>
+                <circle cx="50" cy="45" r="4" fill="#38bdf8"/>
+            </svg>
+            <span class="logo-text">V-Koding</span>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#hero">Início</a></li>
+                <li><a href="#diferenciais">Recursos</a></li>
+                <li><a href="#cadastro">Acesso</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- SEÇÃO PRINCIPAL (HERO) -->
+    <section class="hero" id="hero">
+        <div class="badge-pill">
+            <span>✨</span> O Futuro do Desenvolvimento Aberto
+        </div>
+        <h1>Aprenda a Programar Guiado por IA. <span>Sem Complicação.</span></h1>
+        <p>Transforme suas ideias em softwares e aplicações reais orientando Inteligências Artificiais com comunicação simples, precisa e sem limites — assim como o universo.</p>
+        <a href="#cadastro" class="btn-primary">Garantir Acesso Antecipado</a>
+    </section>
+
+    <!-- SEÇÃO DE DIFERENCIAIS -->
+    <section class="features" id="diferenciais">
+        <div class="card">
+            <div class="card-icon">💬</div>
+            <h3>Comunicação Natural</h3>
+            <p>Esqueça a necessidade de memorizar regras complexas de sintaxe. Aprenda a expressar o que deseja em linguagem clara e direta.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">⚡</div>
+            <h3>Criação Ultra-Rápida</h3>
+            <p>Desenvolva páginas, sistemas e protótipos funcionais em uma fração do tempo tradicional utilizando assistentes inteligentes.</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🌌</div>
+            <h3>Do Zero ao Infinito</h3>
+            <p>Não importa o seu nível atual. A metodologia Vibe Coding foi feita para te acompanhar desde os primeiros passos até projetos avançados.</p>
+        </div>
+    </section>
+
+    <!-- SEÇÃO DE CADASTRO -->
+    <section class="capture-section" id="cadastro">
+        <h2>Faça Parte da Primeira Turma</h2>
+        <p>Receba em primeira mão nosso guia prático para dominar o Vibe Coding e criar seus próprios projetos.</p>
+
+        <form class="email-form" id="vibeForm">
+            <input type="email" placeholder="Digite seu melhor e-mail..." required id="userEmail">
+            <button type="submit">Quero Meu Acesso</button>
+        </form>
+        <span class="security-note">🔒 Respeitamos sua privacidade. Nenhum spam, apenas conteúdo prático.</span>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer>
+        <p>&copy; 2026 V-Koding. O universo do código assistido por IA.</p>
+        <div class="social-links">
+            <a href="#">YouTube</a>
+            <a href="#">X / Twitter</a>
+            <a href="#">Discord</a>
+            <a href="#">GitHub</a>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('vibeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('userEmail').value;
+            alert('Excelente! O e-mail ' + email + ' foi cadastrado com sucesso. Bem-vindo ao universo V-Koding!');
+            document.getElementById('userEmail').value = '';
+        });
+    </script>
+
+</body>
+</html>
